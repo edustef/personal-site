@@ -12,22 +12,19 @@ function Layout({ children }) {
         {children}
       </main>
 
-      <footer className="bg-blue-700">
+      <footer>
         <nav className="flex justify-between max-w-4xl mx-auto p-4 md:p-8 text-sm">
-          <p className="text-white">
+          <p className="text-black">
             Created by{` `}
-            <a
-              className="font-bold no-underline text-white"
-              href="https://bryant.io"
-            >
-              Taylor Bryant
-            </a>
+            <span className="font-bold no-underline text-black">
+              Stefan Eduard
+            </span>
           </p>
 
           <p>
             <a
-              className="font-bold no-underline text-white"
-              href="https://github.com/taylorbryant/gatsby-starter-tailwind"
+              className="font-bold no-underline text-black"
+              href="https://github.com/edustef"
             >
               GitHub
             </a>
@@ -39,7 +36,7 @@ function Layout({ children }) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
