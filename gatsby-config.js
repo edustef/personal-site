@@ -1,10 +1,41 @@
 module.exports = {
   siteMetadata: {
-    title: `Personal Site`,
+    title: `EDwARD`,
     description: `Persona site made with Gatsby starter styled with Tailwind`,
-    author: `@edustef`
+    author: `@edustef`,
   },
   plugins: [
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "src",
+        path: `${__dirname}/src/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+      },
+    },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 590,
+            },
+          },
+        ],
+      },
+    },
     "gatsby-plugin-eslint",
     `gatsby-plugin-react-helmet`,
     {
@@ -14,10 +45,8 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#4dc0b5`,
-        display: `minimal-ui`,
-        icon: `src/images/tailwind-icon.png`
-      }
+        icon: `src/images/logo_e_new.png`,
+      },
     },
     {
       resolve: "gatsby-plugin-postcss",
@@ -25,17 +54,17 @@ module.exports = {
         postCssPlugins: [
           require(`tailwindcss`)(`./tailwind.config.js`),
           require(`autoprefixer`),
-          require(`cssnano`)
-        ]
-      }
+          require(`cssnano`),
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         tailwind: true,
-        purgeOnly: [`src/css/style.css`]
-      }
+        purgeOnly: [`src/css/style.css`],
+      },
     },
-    `gatsby-plugin-offline`
-  ]
+    `gatsby-plugin-offline`,
+  ],
 };

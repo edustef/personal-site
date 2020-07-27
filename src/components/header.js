@@ -1,33 +1,29 @@
-import { graphql, useStaticQuery, Link } from "gatsby";
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
+import logoFull from "../images/logo_full.svg";
+import logoFullDark from "../images/logo_full_black.svg";
 
-function Header() {
+function Header(props) {
   const [isExpanded, toggleExpansion] = useState(false);
-  const { site } = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
 
   return (
     <header>
-      <div className="flex flex-wrap items-center justify-between mx-auto p-4 md:p-8">
-        <Link className="flex items-center no-underline text-black" to="/">
-          <span className="font-bold text-xl tracking-tight">
-            {site.siteMetadata.title}
-          </span>
+      <div className="flex flex-wrap justify-between mx-16 mt-6">
+        <Link className="flex items-center no-underline" to="/">
+          {props.isDarkTheme ? (
+            <img src={logoFullDark} className="w-32 font-sans" />
+          ) : (
+            <img src={logoFull} className="w-32 font-sans" />
+          )}
         </Link>
 
         <button
-          className="block md:hidden border border-white flex items-center px-3 py-2 rounded text-black"
+          className="block md:hidden border flex items-center px-3 py-2 rounded"
           onClick={() => toggleExpansion(!isExpanded)}
         >
           <svg
-            className="fill-current h-3 w-3"
+            className="fill-current w-8 h-8"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -44,31 +40,33 @@ function Header() {
           {[
             {
               route: `/`,
-              title: `Home`
+              title: `Home`,
             },
             {
               route: `/projects`,
-              title: `Projects`
+              title: `Projects`,
             },
             {
-              route: `/gallery`,
-              title: `Photo Gallery`
+              route: `/blog`,
+              title: `Blog`,
             },
             {
               route: `/about`,
-              title: `About`
+              title: `About`,
             },
             {
               route: `/contact`,
-              title: `Contact`
-            }
-          ].map(link => (
+              title: `Contact`,
+            },
+          ].map((link) => (
             <Link
-              className="no-underline text-black text-center m-5 p-5 md:m-2 md:p-2   border-solid border-2 md:border-1 border-black magnify-border"
+              data-content={link.title}
+              className=" inline-block no-underline font-semibold text-center m-2 p-2 slideUpBtn"
               key={link.title}
               to={link.route}
+              activeClassName="active-link"
             >
-              {link.title}
+              <span>{link.title}</span>
             </Link>
           ))}
         </nav>
@@ -76,5 +74,9 @@ function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  isDarkTheme: PropTypes.bool,
+};
 
 export default Header;
