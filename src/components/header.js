@@ -9,7 +9,7 @@ function Header(props) {
 
   return (
     <header>
-      <div className="flex flex-wrap justify-between mx-16 mt-6">
+      <div className="flex flex-wrap justify-between mx-4 md:mx-16 mt-6">
         <Link className="flex items-center no-underline" to="/">
           {props.isDarkTheme ? (
             <img src={logoFullDark} className="w-32 font-sans" />
@@ -19,7 +19,7 @@ function Header(props) {
         </Link>
 
         <button
-          className="block md:hidden border flex items-center px-3 py-2 rounded"
+          className="md:hidden border flex items-center px-3 py-2 rounded"
           onClick={() => toggleExpansion(!isExpanded)}
         >
           <svg

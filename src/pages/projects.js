@@ -10,14 +10,17 @@ function ProjectsPage() {
     allMarkdownRemark: { nodes: content },
   } = useStaticQuery(graphql`
     {
-      allMarkdownRemark {
+      allMarkdownRemark(
+        filter: { frontmatter: { content_type: { eq: "project" } } }
+      ) {
         nodes {
           frontmatter {
             title
             date
             category
             description
-            link
+            repo
+            live_site
             imageAlt
             image {
               childImageSharp {
@@ -69,7 +72,7 @@ function ProjectsPage() {
                     </div>
                     <div className="md:flex-grow ml-8">
                       <a
-                        href={project.frontmatter.link}
+                        href={project.frontmatter.repo}
                         target="__blank"
                         rel="noopener noreferrer"
                       >

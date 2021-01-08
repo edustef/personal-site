@@ -2,33 +2,12 @@ import React, { Component } from "react";
 import { Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import TextWriter from "../utils/TextWriter";
+import TextWriter from "../components/textWriter";
 
 class IndexPage extends Component {
   constructor(props) {
     super(props);
   }
-
-  componentDidMount() {
-    this.hideLoader();
-
-    let textWriter;
-    let element = document.querySelector(".txt-rotate");
-    let toRotate = element.getAttribute("data-rotate");
-    let period = element.getAttribute("data-period");
-
-    if (toRotate) {
-      textWriter = new TextWriter(element, JSON.parse(toRotate), period);
-    }
-
-    return function cleanup() {
-      clearTimeout(textWriter.startTimeout);
-    };
-  }
-
-  hideLoader = () => {
-    document.querySelector(".loader").classList.add("loader-hide");
-  };
 
   render() {
     return (
@@ -38,31 +17,30 @@ class IndexPage extends Component {
           title="Home"
         />
         <section className="text-left flex flex-col">
-          <div className="flex items-center justify-around w-full">
-            <div>
-              <h2 className="text-2xl font-semibold font-mono">
+          <div className="flex flex-col md:flex-row items-start justify-around w-full">
+            <div className="w-8/12">
+              <h2 className="text-lg md:text-2xl font-semibold font-mono">
                 {" "}
-                &lt;FRONT-END CREATOR /&gt;
+                &lt;FrontEndCreator /&gt;
               </h2>
-              <h1 className="text-6xl font-bold inline-block max-w-lg text-writer">
+              <h1 className="text-2xl md:text-6xl font-bold inline-block max-w-lg text-writer">
                 Developing your{" "}
-                <span
-                  className="inline-block px-2 italic txt-rotate"
-                  data-period="1000"
-                  data-rotate='[ "ideas", "aspirations", "goals", "expectations" ]'
-                ></span>
+                <TextWriter
+                  period={1000}
+                  words={["ideas", "aspirations", "goals", "expectations"]}
+                />
                 !
               </h1>
               <div>
                 <Link
-                  className="inline-block text-xl no-underline text-left text-center mx-2 mt-4 p-5 md:p-2 slideUpBtn self-start"
+                  className="inline-block md:text-xl no-underline text-left mt-4 mr-4 p-2 slideUpBtn self-start"
                   data-content="Projects"
                   to="/projects"
                 >
                   <span>Projects </span>
                 </Link>
                 <Link
-                  className="inline-block text-xl no-underline text-left text-center mx-2 mt-4 p-5 md:p-2 snapLeftBtn self-start bg-teal-500"
+                  className="inline-block md:text-xl no-underline text-left mt-4 p-2 snapLeftBtn self-start bg-teal-500"
                   data-content="Contact me"
                   to="/contact"
                 >
@@ -70,8 +48,8 @@ class IndexPage extends Component {
                 </Link>
               </div>
             </div>
-            <div className="latest-posts w-1/3">
-              <h2>Latest blog posts</h2>
+            <div className="latest-posts mt-12 md:w-1/3">
+              <h2 className="text-4xl font-bold">Latest blog posts</h2>
             </div>
           </div>
         </section>

@@ -3,23 +3,20 @@ import React, { useState, useEffect } from "react";
 
 import Header from "./header";
 import { FaGithub } from "react-icons/fa";
+import style from "./layout.module.css";
 
 function Layout({ children }) {
   let [isDarkTheme, setIsDarkTheme] = useState(false);
-  let rootClasses =
-    "flex flex-col font-sans min-h-screen text-gray-900 layout-root fade-in-fwd ";
 
-  let hideLoader = () => {
-    document.querySelector(".loader").classList.add("loader-hide");
-  };
+  let rootClasses =
+    style.layout +
+    " flex flex-col font-sans min-h-screen text-gray-900 fade-in-fwd ";
 
   let toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
 
   useEffect(() => {
-    hideLoader();
-
     if (!window.localStorage.getItem("isDarkTheme")) {
       window.localStorage.setItem("isDarkTheme", isDarkTheme);
     } else {
@@ -34,13 +31,13 @@ function Layout({ children }) {
   return (
     <div className={isDarkTheme ? rootClasses + "dark" : rootClasses + "light"}>
       <Header isDarkTheme={isDarkTheme} />
-      <main className="flex flex-col flex-1 mx-16 my-12 justify-center">
+      <main className="mt-12 md:mt-0 flex flex-col flex-1 mx-4 md:mx-16 justify-center">
         {children}
       </main>
 
       <footer>
-        <button onClick={toggleTheme}>Change Theme</button>
-        <nav className="flex justify-between max-w-4xl mx-auto md:my-12 text-md">
+        <div className="flex justify-between max-w-4xl mx-auto md:my-12 text-md">
+          <button onClick={toggleTheme}>Test change Theme</button>
           <p className="">
             Created by{` `}
             <span className="font-bold no-underline">Stefan Eduard</span>
@@ -54,7 +51,7 @@ function Layout({ children }) {
               <FaGithub className="inline" /> GitHub
             </a>
           </p>
-        </nav>
+        </div>
       </footer>
     </div>
   );

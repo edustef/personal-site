@@ -1,0 +1,7 @@
+.txt-rotate>.wrap {
+  border-right: 0.08em solid var(--tw-gray-600);
+}
+
+.text-writer>span {
+  background-color: var(--highlight-color);
+}

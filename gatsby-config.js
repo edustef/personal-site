@@ -45,7 +45,6 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `#ffffff`,
-        icon: `src/images/logo_e_new.png`,
       },
     },
     {
